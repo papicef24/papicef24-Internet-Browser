@@ -1,0 +1,34 @@
+{
+  "name": "internet-browser",
+  "version": "1.0.0",
+  "description": "Web-based Internet Browser with Plugin Architecture and Flash Player 11 support",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "browser",
+    "internet",
+    "flash",
+    "plugins",
+    "wayback-machine",
+    "archival"
+  ],
+  "author": "papicef24",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/papicef24/papicef24-Internet-Browser"
+  },
+  "bugs": {
+    "url": "https://github.com/papicef24/papicef24-Internet-Browser/issues"
+  },
+  "homepage": "https://github.com/papicef24/papicef24-Internet-Browser#readme"
+}

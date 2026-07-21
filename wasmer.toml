@@ -1,0 +1,25 @@
+[package]
+name = "papicef24/internet-browser"
+version = "1.0.0"
+description = "Web-based Internet Browser with Plugin Architecture and Flash Player 11 support"
+namespace = "papicef24"
+
+[[module]]
+name = "internet-browser"
+source = "index.html"
+
+[dependencies]
+# Node.js runtime for Wasmer
+
+[[command]]
+name = "start"
+module = "internet-browser"
+invoker = true
+
+[package.metadata]
+authors = ["papicef24"]
+homepage = "https://github.com/papicef24/papicef24-Internet-Browser"
+license = "MIT"
+repository = "https://github.com/papicef24/papicef24-Internet-Browser"
+keywords = ["browser", "internet", "flash", "wayback-machine", "plugins"]
+categories = ["application", "web"]
