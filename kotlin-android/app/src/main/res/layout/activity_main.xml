@@ -41,7 +41,7 @@
                 android:id="@+id/reloadBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="⟳ Reload"
+                android:text="↻ Reload"
                 android:padding="8dp"
                 android:textSize="12sp" />
 
@@ -84,6 +84,41 @@
                 android:textSize="13sp" />
         </LinearLayout>
 
+        <!-- Flash Player Control Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:spacing="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Flash Player:"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <ToggleButton
+                android:id="@+id/flashToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="ON"
+                android:textOff="OFF"
+                android:padding="8dp" />
+
+            <TextView
+                android:id="@+id/flashStatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="🔴 Flash Player 11 ENABLED"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="@color/flashEnabled" />
+        </LinearLayout>
+
         <!-- Year Navigation Row -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -113,7 +148,7 @@
         android:id="@+id/statusText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ready"
+        android:text="Ready - Flash Player 11 Active"
         android:padding="6dp"
         android:textSize="11sp"
         android:background="#e8eef7" />

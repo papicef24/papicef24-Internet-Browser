@@ -5,4 +5,6 @@
     <color name="colorAccent">#4285f4</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="flashEnabled">#00AA00</color>
+    <color name="flashDisabled">#FF0000</color>
 </resources>

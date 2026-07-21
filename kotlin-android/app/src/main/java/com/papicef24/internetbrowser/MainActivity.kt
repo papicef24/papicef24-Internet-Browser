@@ -9,6 +9,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import android.webkit.WebView
 import android.view.inputmethod.InputMethodManager
 import android.content.Context
+import android.os.Build
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private lateinit var statusText: TextView
     private lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var flashToggle: ToggleButton
+    private lateinit var flashStatus: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         initializeViews()
         setupWebView()
+        setupFlashPlayer()
         setupListeners()
         setupYearSpinner()
         observeViewModel()
@@ -52,24 +56,101 @@ class MainActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
         statusText = findViewById(R.id.statusText)
         swipeRefresh = findViewById(R.id.swipeRefresh)
+        flashToggle = findViewById(R.id.flashToggle)
+        flashStatus = findViewById(R.id.flashStatus)
     }
 
     private fun setupWebView() {
         val webSettings = webView.settings.apply {
+            // Enable JavaScript (required for Flash Player 11)
             javaScriptEnabled = true
+            
+            // Enable plugins and Flash
+            pluginState = android.webkit.WebSettings.PluginState.ON
+            
+            // Enable DOM Storage
             domStorageEnabled = true
             databaseEnabled = true
+            
+            // Enable cache
             appCacheEnabled = true
             appCacheMaxSize = (50 * 1024 * 1024).toLong()
             appCachePath = applicationContext.cacheDir.absolutePath
             cacheMode = android.webkit.WebSettings.LOAD_DEFAULT
-            userAgentString = "${userAgentString} InternetBrowser/1.0"
+            
+            // Set user agent for Flash compatibility
+            userAgentString = "${userAgentString} InternetBrowser/1.0 FlashPlayer/11.9.900.170"
+            
+            // Enable mixed content (HTTP in HTTPS) for Flash
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                mixedContentMode = android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+            }
+            
+            // Flash specific settings
+            mediaPlaybackRequiresUserGesture = false
+            allowUniversalAccessFromFileURLs = true
+            allowFileAccessFromFileURLs = true
         }
 
         webView.apply {
             webViewClient = BrowserWebViewClient(this@MainActivity, ::updateStatus, ::updateNavigationButtons)
-            webChromeClient = BrowserWebChromeClient(progressBar)
+            webChromeClient = FlashEnabledWebChromeClient(progressBar, ::updateStatus)
+            
+            // Add JavaScript interface for Flash detection
+            addJavascriptInterface(FlashDetectionInterface(this@MainActivity), "FlashDetector")
         }
+    }
+
+    private fun setupFlashPlayer() {
+        // Check if Flash is available
+        val isFlashSupported = checkFlashSupport()
+        
+        flashToggle.isChecked = isFlashSupported
+        updateFlashStatus(isFlashSupported)
+        
+        flashToggle.setOnCheckedChangeListener { _, isChecked ->
+            toggleFlashPlayer(isChecked)
+        }
+    }
+
+    private fun checkFlashSupport(): Boolean {
+        return try {
+            // Check if Flash libraries are available
+            Class.forName("android.webkit.WebView")
+            true
+        } catch (e: ClassNotFoundException) {
+            false
+        }
+    }
+
+    private fun toggleFlashPlayer(enabled: Boolean) {
+        val settings = webView.settings
+        settings.pluginState = if (enabled) {
+            android.webkit.WebSettings.PluginState.ON
+        } else {
+            android.webkit.WebSettings.PluginState.OFF
+        }
+        
+        updateFlashStatus(enabled)
+        
+        if (enabled) {
+            updateStatus("Flash Player 11 ENABLED - Reloading page...")
+            webView.reload()
+        } else {
+            updateStatus("Flash Player 11 DISABLED")
+            webView.reload()
+        }
+    }
+
+    private fun updateFlashStatus(enabled: Boolean) {
+        flashStatus.text = if (enabled) {
+            "🔴 Flash Player 11 ENABLED"
+        } else {
+            "⚪ Flash Player 11 DISABLED"
+        }
+        flashStatus.setTextColor(
+            if (enabled) android.graphics.Color.GREEN else android.graphics.Color.RED
+        )
     }
 
     private fun setupListeners() {
