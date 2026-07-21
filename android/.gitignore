@@ -1,0 +1,28 @@
+# Android Build
+*.apk
+*.ap_
+*.dex
+*.class
+*.jar
+*.so
+
+# Gradle files
+.gradle/
+build/
+
+# Local configuration file
+local.properties
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Keystore
+keystore.jks
