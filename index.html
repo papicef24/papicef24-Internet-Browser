@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet Browser</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="browser-container">
+        <!-- Browser Toolbar -->
+        <div class="browser-toolbar">
+            <div class="toolbar-buttons">
+                <button id="backBtn" class="nav-btn" title="Back">← Back</button>
+                <button id="forwardBtn" class="nav-btn" title="Forward">Forward →</button>
+                <button id="reloadBtn" class="nav-btn" title="Reload">⟳ Reload</button>
+                <button id="homeBtn" class="nav-btn" title="Home">⌂ Home</button>
+            </div>
+
+            <!-- Address Bar -->
+            <div class="address-bar-container">
+                <input 
+                    type="text" 
+                    id="addressBar" 
+                    class="address-bar" 
+                    placeholder="Enter URL or search..."
+                    value="https://www.google.com"
+                >
+                <button id="goBtn" class="go-btn">Go</button>
+            </div>
+
+            <!-- Year Navigation -->
+            <div class="year-nav-container">
+                <label for="yearSelect">Browse by Year:</label>
+                <select id="yearSelect" class="year-select">
+                    <option value="">Current</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>
+                    <option value="2018">2018</option>
+                    <option value="2010">2010</option>
+                    <option value="2000">2000</option>
+                </select>
+            </div>
+
+            <!-- Plugin Indicator -->
+            <div class="plugin-indicator">
+                <span id="pluginStatus" class="plugin-status">Plugins: Loading...</span>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span id="statusText">Ready</span>
+        </div>
+
+        <!-- Browser Content Area -->
+        <div class="browser-content">
+            <iframe 
+                id="contentFrame" 
+                class="content-frame"
+                sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-presentation"
+            ></iframe>
+        </div>
+
+        <!-- Plugin Panel -->
+        <div class="plugin-panel">
+            <div class="plugin-header">
+                <h3>Installed Plugins</h3>
+                <button id="closePluginPanel" class="close-btn">×</button>
+            </div>
+            <div id="pluginList" class="plugin-list"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="plugin-manager.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
