@@ -22,7 +22,7 @@ class PluginManager {
             version: '11.9.900.170',
             author: 'Adobe Systems',
             description: 'Legacy Flash player plugin for archival support',
-            enabled: false,
+            enabled: true,
             mimeTypes: ['application/x-shockwave-flash', 'application/futuresplash'],
             hooks: {
                 'page:load': this.onPageLoad.bind(this),
