@@ -1,0 +1,17 @@
+*.apk
+*.ap_
+*.dex
+*.class
+*.jar
+*.so
+.gradle/
+build/
+local.properties
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.DS_Store
+Thumbs.db
+keystore.jks

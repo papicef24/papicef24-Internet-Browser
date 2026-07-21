@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Internet Browser</string>
+    <string name="app_description">Web-based Internet Browser with Plugin Architecture and Flash Player 11 support</string>
+    <string name="app_version">1.0.0</string>
+    <string name="home_url">https://www.google.com</string>
+</resources>
